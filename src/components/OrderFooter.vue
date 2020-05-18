@@ -1,10 +1,9 @@
 <template>
-  <div>AliPay</div>
+  <div>OrderFooter</div>
 </template>
 
 <script>
 export default {
-  name: "alipay",
-  components: {}
+  name: "order-footer"
 };
 </script>
