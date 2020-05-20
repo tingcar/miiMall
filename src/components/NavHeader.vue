@@ -12,9 +12,10 @@
           <a href="javascript:;" v-if="username">{{ username }}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username">我的订单</a>
-          <a href="javascript:;">注册</a>
+          <a href="javascript:;" v-if="!username">注册</a>
           <a href="javascript:;" class="my-cart">
-            <span class="icon-cart" @click="goToCart"></span>购物车
+            <span class="icon-cart" @click="goToCart"></span>
+            购物车 ({{cartCount}})
           </a>
         </div>
       </div>
@@ -118,13 +119,16 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "nav-header",
   data() {
     return {
-      username: "jack",
       phoneList: []
     };
+  },
+  computed: {
+    ...mapState(["username", "cartCount"])
   },
   filters: {
     currency(val) {
@@ -134,6 +138,9 @@ export default {
   },
   mounted() {
     this.getProductList();
+    // this.axios.get("/user/login").then(res => {
+    //   this.username = res.username;
+    // });
   },
   methods: {
     login() {
@@ -183,6 +190,7 @@ export default {
         background-color: #ff6600;
         text-align: center;
         color: #fff;
+        margin-right: 0px;
         .icon-cart {
           @include bgImg(16px, 12px, "/imgs/icon-cart-checked.png");
           margin-right: 4px;
@@ -195,32 +203,7 @@ export default {
       position: relative;
       height: 112px;
       @include flex();
-      .header-logo {
-        display: inline-block;
-        width: 55px;
-        height: 55px;
-        background-color: #ff6600;
-        a {
-          display: inline-block;
-          width: 110px;
-          height: 55px;
-          &:before {
-            content: "";
-            display: inline-block;
-            @include bgImg(55px, 55px, "/imgs/mi-logo.png", 55px);
-            transition: margin 0.2s;
-          }
-          &:after {
-            content: "";
-            display: inline-block;
-            @include bgImg(55px, 55px, "/imgs/mi-home.png", 55px);
-          }
-          &:hover:before {
-            margin-left: -55px;
-            transition: margin 0.2s;
-          }
-        }
-      }
+
       .header-menu {
         display: inline-block;
         width: 643px;

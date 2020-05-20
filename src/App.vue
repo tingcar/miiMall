@@ -19,9 +19,22 @@ export default {
     // storage.setItem("user", { a: 1 });
     // storage.setItem("abc", { a: 1 }, "user");
     // storage.clear("a", "user");
-    this.axios.get("/user/login").then(res => {
-      this.res = res;
-    });
+    this.getUser();
+    this.getCartCount();
+  },
+  methods: {
+    getUser() {
+      this.axios.get("/user").then(res => {
+        //to-do save to vuex
+        this.$store.dispatch("saveUserName", res.username);
+      });
+    },
+    getCartCount() {
+      this.axios.get("/carts/products/sum").then(res => {
+        //to-do save to vuex
+        this.$store.dispatch("saveCartCount", res.data);
+      });
+    }
   }
 };
 </script>
