@@ -12,10 +12,11 @@
           <a href="javascript:;" v-if="username">{{ username }}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username">我的订单</a>
+          <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="javascript:;" v-if="!username">注册</a>
           <a href="javascript:;" class="my-cart">
             <span class="icon-cart" @click="goToCart"></span>
-            购物车 ({{cartCount}})
+            购物车 ({{ cartCount }})
           </a>
         </div>
       </div>
@@ -52,7 +53,11 @@
                 <li class="product">
                   <a href target="_blank">
                     <div class="pro-img">
-                      <img v-lazy="'/imgs/nav-img/nav-3-1.jpg'" />
+                      <img
+                        v-lazy="
+                                                    '/imgs/nav-img/nav-3-1.jpg'
+                                                "
+                      />
                     </div>
                     <div class="pro-name">小米壁画电视 65英寸</div>
                     <div class="pro-price">6999 RMB</div>
@@ -70,7 +75,11 @@
                 <li class="product">
                   <a href target="_blank">
                     <div class="pro-img">
-                      <img v-lazy="'/imgs/nav-img/nav-3-3.png'" />
+                      <img
+                        v-lazy="
+                                                    '/imgs/nav-img/nav-3-3.png'
+                                                "
+                      />
                     </div>
                     <div class="pro-name">小米电视4A 32英寸</div>
                     <div class="pro-price">699 RMB</div>
@@ -79,7 +88,11 @@
                 <li class="product">
                   <a href target="_blank">
                     <div class="pro-img">
-                      <img v-lazy="'/imgs/nav-img/nav-3-4.jpg'" />
+                      <img
+                        v-lazy="
+                                                    '/imgs/nav-img/nav-3-4.jpg'
+                                                "
+                      />
                     </div>
                     <div class="pro-name">小米电视4A 55英寸</div>
                     <div class="pro-price">1799 RMB</div>
@@ -88,7 +101,11 @@
                 <li class="product">
                   <a href target="_blank">
                     <div class="pro-img">
-                      <img v-lazy="'/imgs/nav-img/nav-3-5.jpg'" />
+                      <img
+                        v-lazy="
+                                                    '/imgs/nav-img/nav-3-5.jpg'
+                                                "
+                      />
                     </div>
                     <div class="pro-name">小米电视4A 65英寸</div>
                     <div class="pro-price">2699 RMB</div>
@@ -97,7 +114,11 @@
                 <li class="product">
                   <a href target="_blank">
                     <div class="pro-img">
-                      <img v-lazy="'/imgs/nav-img/nav-3-6.png'" />
+                      <img
+                        v-lazy="
+                                                    '/imgs/nav-img/nav-3-6.png'
+                                                "
+                      />
                     </div>
                     <div class="pro-name">查看全部</div>
                     <div class="pro-price">查看全部</div>
@@ -145,6 +166,9 @@ export default {
   methods: {
     login() {
       this.$router.push("/login");
+    },
+    logout() {
+      this.$cookie.set("userId", "", { expires: "-1" });
     },
     getProductList() {
       // this.axios

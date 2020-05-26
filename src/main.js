@@ -4,6 +4,8 @@ import VueAxios from 'vue-axios';
 import VueLazyLoad from 'vue-lazyload';
 import VueCookie from 'vue-cookie';
 import App from './App.vue';
+import { Message } from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import store from './store/index';
 import router from './router';
 // import VueAwesomeSwiper from 'vue-awesome-swiper';
@@ -30,7 +32,7 @@ axios.interceptors.response.use(function(response) {
         }
         window.location.href = '/#/login';
     } else {
-        alert(res.msg);
+        Message.warning(res.msg);
         return Promise.reject(res);
     }
 });
@@ -41,6 +43,7 @@ Vue.use(VueCookie);
 Vue.use(VueLazyLoad, {
     loading: '/imgs/loading-svg/loading-bars.svg',
 });
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false;
 
 new Vue({
